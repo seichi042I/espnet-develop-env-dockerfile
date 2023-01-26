@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  espnet:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: espnet
+    volumes:
+      - ./files:/home/user/host/files
