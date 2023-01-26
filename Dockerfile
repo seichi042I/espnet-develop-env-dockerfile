@@ -24,14 +24,17 @@ RUN apt-get update
 RUN apt-get -y install cuda
 
 # install nvcc
-RUN apt-get install \
-    nvidia-cuda-toolkit \
-    make \
+RUN apt-get install nvidia-cuda-toolkit -y
+
+# other command
+RUN apt-get install make \
     g++ \
     unzip \
     cmake \
     sox \
-    libsndfile1-dev \
+    -y
+RUN apt-get install libsndfile1-dev -y
+RUN apt-get install \
     ffmpeg \
     flac \
     -y
