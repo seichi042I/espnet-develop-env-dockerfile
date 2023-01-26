@@ -27,13 +27,13 @@ RUN apt-get -y install cuda
 RUN apt-get install nvidia-cuda-toolkit -y
 
 # other command
+RUN apt-get install libsndfile1-dev -y
 RUN apt-get install make \
     g++ \
     unzip \
     cmake \
     sox \
     -y
-RUN apt-get install libsndfile1-dev -y
 RUN apt-get install \
     ffmpeg \
     flac \
