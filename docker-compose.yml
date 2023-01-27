@@ -6,5 +6,15 @@ services:
       context: .
       dockerfile: Dockerfile
     image: espnet
+    container_name: espnet-dev
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     volumes:
       - ./files:/home/user/host/files
