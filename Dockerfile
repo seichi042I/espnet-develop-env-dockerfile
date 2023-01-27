@@ -50,10 +50,10 @@ WORKDIR /home/$USERNAME/
 
 # espnet install
 RUN git clone https://github.com/espnet/espnet
-RUN cd espnet/tools && ./setup_anaconda.sh miniconda espnet 3.8 && \
+RUN cd espnet/tools && ./setup_anaconda.sh venv espnet 3.8 && \
     make TH_VERSION=1.12.1 CUDA_VERSION=11.6 && \
-    ./miniconda/bin/conda init bash
-ENV PATH /home/$USERNAME/espnet/tools/miniconda/bin:$PATH
+    ./venv/bin/conda init bash
+ENV PATH /home/$USERNAME/espnet/tools/venv/bin:$PATH
 # RUN conda activate espnet && \
 #     pip install matplotlib pyopenjtalk==0.2.0 espnet_model_zoo
 RUN cd espnet && \
@@ -63,6 +63,3 @@ RUN cd espnet && \
     echo "export TTS_DATA_ROOT=${esp_root}/data_root" >> /home/$USERNAME/.bashrc && \
     source /home/$USERNAME/.bashrc
 
-# ENTRYPOINT ["/bin/bash", "-c"]
-# pytorch install 
-# RUN pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116
