@@ -18,18 +18,6 @@ RUN apt-get install \
     wget \
     curl -y
 
-# install cuda
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
-RUN mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
-RUN wget https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda-repo-wsl-ubuntu-12-0-local_12.0.0-1_amd64.deb
-RUN dpkg -i cuda-repo-wsl-ubuntu-12-0-local_12.0.0-1_amd64.deb
-RUN cp /var/cuda-repo-wsl-ubuntu-12-0-local/cuda-*-keyring.gpg /usr/share/keyrings/
-RUN apt-get update
-# RUN apt-get -y install cuda
-
-# install nvcc
-# RUN apt-get install nvidia-cuda-toolkit -y
-
 # other
 RUN apt-get install libsndfile1-dev -y
 RUN apt-get install make \
@@ -42,7 +30,6 @@ RUN apt-get install \
     ffmpeg \
     flac \
     -y
-# RUN apt-get install cuda-drivers -y
 
 # activate user
 USER $USERNAME
@@ -54,8 +41,6 @@ RUN cd espnet/tools && ./setup_anaconda.sh venv espnet 3.8 && \
     make TH_VERSION=1.12.1 CUDA_VERSION=11.6 && \
     ./venv/bin/conda init bash
 ENV PATH /home/$USERNAME/espnet/tools/venv/bin:$PATH
-# RUN conda activate espnet && \
-#     pip install matplotlib pyopenjtalk==0.2.0 espnet_model_zoo
 RUN cd espnet && \
     esp_root=`pwd` && \
     echo "export ESPNET_ROOT=$esp_root" >> /home/$USERNAME/.bashrc && \
